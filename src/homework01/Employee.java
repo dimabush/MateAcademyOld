@@ -1,11 +1,11 @@
-package homework_1.task_7;
+package homework01;
 
-public class Employee implements Cloneable{
+public class Employee implements Cloneable {
     private int id;
     private String name;
     private Department department;
 
-    public Employee(int id, String name, Department department) {
+    Employee(int id, String name, Department department) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -36,9 +36,9 @@ public class Employee implements Cloneable{
     }
 
     @Override
-    protected Object clone()throws CloneNotSupportedException{
-        Employee cloned = (Employee)super.clone();
-        cloned.setDepartment((Department)cloned.getDepartment().clone());
+    public Employee clone() throws CloneNotSupportedException {
+        Employee cloned = (Employee) super.clone();
+        cloned.setDepartment((Department) cloned.getDepartment().clone());
         return cloned;
     }
 }

@@ -1,10 +1,10 @@
-package homework_1.task_7;
+package homework01;
 
-public class Department implements Cloneable{
+public class Department implements Cloneable {
     private int id;
     private String name;
 
-    public Department(int id, String name) {
+    Department(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -26,7 +26,7 @@ public class Department implements Cloneable{
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException{
+    protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 }
