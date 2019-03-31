@@ -8,8 +8,7 @@ public class RedactorScript {
             for (int j = 0; j < scriptArray.length; j++) {
                 if (scriptArray[j].startsWith(rolesArray[i] + ":")) {
                     String strToAppend = scriptArray[j].substring(rolesArray[i].length() + 1);
-                    String numbOfLines = j + 1 + ")";
-                    resultScriptBuilder.append(numbOfLines).append(strToAppend).append('\n');
+                    resultScriptBuilder.append(j+1).append(")").append(strToAppend).append('\n');
                 }
             }
             resultScriptBuilder.append('\n');
