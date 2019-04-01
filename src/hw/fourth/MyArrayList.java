@@ -4,9 +4,9 @@ public class MyArrayList<T> implements List<T> {
 
     private int size;
     private T[] array;
+    private final int EXPANSE = 5;
 
-    public MyArrayList() {
-        size = 0;
+    MyArrayList() {
         array = (T[]) new Object[size];
     }
 
@@ -19,16 +19,15 @@ public class MyArrayList<T> implements List<T> {
     public void add(T value) {
         if (size < array.length) {
             array[size] = value;
-            size++;
         } else {
-            T[] newArray = (T[]) new Object[size + 5];
+            T[] newArray = (T[]) new Object[size + EXPANSE];
             for (int i = 0; i < size; i++) {
                 newArray[i] = array[i];
             }
             newArray[size] = value;
             array = newArray;
-            size++;
         }
+        size++;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class MyArrayList<T> implements List<T> {
             if (size < array.length) {
                 sizeNewArray = array.length;
             } else {
-                sizeNewArray = size + 5;
+                sizeNewArray = size + EXPANSE;
             }
             T[] newArray = (T[]) new Object[sizeNewArray];
             int element = 0;
@@ -69,28 +68,8 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public void addAll(List<T> list) {
-        if (list.size() == 1){
-            this.add(list.get(0));
-        } else if (list.size() > 1){
-            int sizeNewArray = size + list.size();
-            int element = 0;
-            if (sizeNewArray < array.length){
-                for (int i = size; i < sizeNewArray; i++){
-                    array[i] = list.get(element);
-                    element++;
-                }
-            } else {
-                T [] newArray = (T[]) new Object[sizeNewArray];
-                for (int i = 0; i < size; i++){
-                    newArray[i] = array[i];
-                }
-                for (int i = size; i < sizeNewArray; i++){
-                    newArray[i] = list.get(element);
-                    element++;
-                }
-                array = newArray;
-            }
-            size = sizeNewArray;
+        for (int i = 0; i < list.size(); i++) {
+            this.add(list.get(i));
         }
     }
 
@@ -101,12 +80,27 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        return null;
+        T result;
+        if (index < 0 || index > size - 1){
+            throw new IndexOutOfBoundsException("Index is out of range");
+        } else {
+            result = array[index];
+            for (int i = index; i < size - 1; i ++){
+                array[i] = array[i + 1];
+            }
+            return result;
+        }
     }
 
     @Override
     public T remove(T value) {
-        return null;
+        T result = null;
+        for (int i = 0; i < size; i++){
+            if (array[i] == value){
+                this.remove(i);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -116,9 +110,12 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder(array[0].toString());
-        for (int i = 1; i < size; i++) {
-            result.append(", ").append(array[i]);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            result.append(array[i]);
+            if (i != size - 1){
+                result.append(", ");
+            }
         }
         return result.toString();
     }

@@ -14,9 +14,9 @@ public interface List<T> {
 
     void set(T value, int index);
 
-    T remove(int index); // возвращаем элемент, который удалили
+    T remove(int index); // return the item that was deleted
 
-    T remove(T value); // удалять первый, который встретится
+    T remove(T value); // delete the first one to meet
 
     boolean isEmpty();
 }
